@@ -13,4 +13,8 @@
     <PackageReference Include="xunit.extensibility.core" Version="2.9.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Ej-03\taskManager\NewFolder\" />
+  </ItemGroup>
+
 </Project>
