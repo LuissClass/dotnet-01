@@ -11,7 +11,7 @@ namespace dotnet_01.Ej_02.counter.repository
         internal InMemoryRepository() {
         }
 
-        public void CreateCounter(CounterData counterData)
+        public void CreateCounter(CounterDTO counterData)
         {
             inMemoryCounter = new Counter(counterData.counter);
         }

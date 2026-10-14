@@ -8,7 +8,7 @@ namespace dotnet_01.Ej_02.repositories
 {
     internal interface Repository
     {
-        void CreateCounter(CounterData counterData);
+        void CreateCounter(CounterDTO counterData);
         void SumOne(Counter counter);
         Counter GetCounter();
     }

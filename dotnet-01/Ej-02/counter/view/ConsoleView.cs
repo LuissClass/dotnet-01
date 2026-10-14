@@ -8,18 +8,18 @@ namespace dotnet_01.Ej_02.counter.view
 {
     internal class ConsoleView : View
     {
-        public CounterData CreateCounter()
+        public CounterDTO CreateCounter()
         {
             Console.WriteLine("== NEW COUNTER ==");
             Console.Write("Enter initial value: ");
             var input = Console.ReadLine();
-            return new CounterData(int.Parse(input));
+            return new CounterDTO(int.Parse(input));
         }
 
-        public void DisplayCounter(Counter counter)
+        public void DisplayCounter(CounterDisplayDTO counterDisplayData)
         {
             Console.WriteLine("== COUNTER ==");
-            Console.WriteLine($"Counter value: {counter.counter}\n");
+            Console.WriteLine($"Counter value: {counterDisplayData.counter}\n");
         }
 
         public MenuOption GetMenuOption()

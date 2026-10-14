@@ -4,11 +4,11 @@ using System.Text;
 
 namespace dotnet_01.Ej_02.counter.model
 {
-    internal class CounterData
+    internal class CounterDTO
     {
-        internal int counter { get; } = 0;
+        internal int counter { get; } 
 
-        internal CounterData(int initialCounter)
+        internal CounterDTO(int initialCounter)
         {
             counter = initialCounter;
         }

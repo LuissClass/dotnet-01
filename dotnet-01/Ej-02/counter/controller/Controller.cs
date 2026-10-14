@@ -19,7 +19,7 @@ namespace dotnet_01.Ej_02.controller
 
         internal void CreateCounter()
         {
-            CounterData counterData = view.CreateCounter();
+            CounterDTO counterData = view.CreateCounter();
             repository.CreateCounter(counterData);
         }
 
@@ -33,7 +33,13 @@ namespace dotnet_01.Ej_02.controller
         internal void DisplayCounter()
         {
             Counter counter = repository.GetCounter();
-            view.DisplayCounter(counter);
+            view.DisplayCounter(toDisplayData(counter));
+        }
+
+        private CounterDisplayDTO toDisplayData(Counter counter)
+        {
+            CounterDisplayDTO counterDisplayData = new CounterDisplayDTO(counter.counter);
+            return counterDisplayData;
         }
     }
 }

@@ -8,8 +8,8 @@ namespace dotnet_01.Ej_02.counter.view
 {
     internal interface View
     {
-        CounterData CreateCounter();
-        void DisplayCounter(Counter counter);
+        CounterDTO CreateCounter();
+        void DisplayCounter(CounterDisplayDTO counterDisplayData);
         void SumOne();
         MenuOption GetMenuOption();
     }
