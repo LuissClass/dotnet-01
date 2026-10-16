@@ -11,12 +11,10 @@ namespace dotnet_01.Ej_03.taskManager.views
         internal string description { get; set; }
         internal bool completed { get; set; }
 
-        internal TaskDisplayDTO(int id, string name, string description, bool completed)
+        internal TaskDisplayDTO(string name, string description)
         {
-            this.id = id;
             this.name = name;
             this.description = description;
-            this.completed = completed;
         }
     }
 }

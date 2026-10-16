@@ -1,4 +1,8 @@
-﻿using System;
+﻿using dotnet_01.Ej_03.taskManager.controllers;
+using dotnet_01.Ej_03.taskManager.tasks;
+using dotnet_01.Ej_03.taskManager.tasks.repository;
+using dotnet_01.Ej_03.taskManager.views;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -31,7 +35,7 @@ namespace dotnet_01.Ej_03
     {
         internal static void TaskManager(string[] args)
         {
-
+            TaskController taskController = new(new TaskRepositoryImpl(), new TaskViewImpl());
         }
     }
 }

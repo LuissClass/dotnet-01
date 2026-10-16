@@ -7,10 +7,12 @@ namespace dotnet_01.Ej_03.taskManager.views
 {
     internal interface TaskView
     {
-        void DisplayTaskList(List<string> tasks);
-        void DisplayTaskDetails(int idTask);
-        TaskDTO AskTask();
-        void RemoveTask(int idTask);
-        TaskDTO UpdateTask();
+        void DisplayList(List<TaskDisplayDTO> tasks);
+        void DisplayDetails(TaskDisplayDTO taskDisplayDTO);
+        TaskDisplayDTO AskDetails();
+        int AskId();
+        TaskDisplayDTO AskToUpdate();
+
+        MenuOption AskMenuOption();
     }
 }

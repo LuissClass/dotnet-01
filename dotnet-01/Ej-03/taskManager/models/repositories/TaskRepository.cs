@@ -6,10 +6,11 @@ namespace dotnet_01.Ej_03.taskManager.tasks
 {
     internal interface TaskRepository
     {
-        void AddTask(TaskEntity task);
-        void RemoveTask(TaskEntity task);
-        TaskEntity ConsultTask(int taskId);
-        void UpdateTask(TaskEntity taskEntity);
-        void MarkTaskAsCompleted(int taskId);
+        void Add(TaskEntity task);
+        void Remove(TaskEntity task);
+        TaskEntity Consult(int taskId);
+        void Update(TaskEntity taskEntity);
+        void MarkAsCompleted(int taskId);
+        List<TaskEntity> GetAll();
     }
 }

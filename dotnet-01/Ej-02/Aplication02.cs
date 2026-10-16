@@ -10,7 +10,7 @@ namespace dotnet_01.Ej_02
     internal class Aplication02
     {
         internal static void Run()
-        {
+        {   
             Controller controller = new Controller(new counter.view.ConsoleView(), new InMemoryRepository());
 
             while (true)
