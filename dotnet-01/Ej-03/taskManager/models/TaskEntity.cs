@@ -12,8 +12,12 @@ namespace dotnet_01.Ej_03.taskManager.tasks
         internal string description { get; set; }
         internal bool completed { get; set; }
 
-        internal TaskEntity(string name, string description)
+        internal TaskEntity(int id, string name, string description)
         {
+            if (int.IsNegative(id))
+            { 
+                throw new InvalidTaskException("Id cannot be negative.");
+            }
             if (string.IsNullOrWhiteSpace(name) && string.IsNullOrWhiteSpace(description))
             {
                 throw new InvalidTaskException("Name and description cannot be null or empty.");

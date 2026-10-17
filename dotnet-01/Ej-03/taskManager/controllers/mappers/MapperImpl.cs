@@ -11,12 +11,12 @@ namespace dotnet_01.Ej_03.taskManager.controllers.mappers
     {
         public TaskDisplayDTO toTaskDisplayDTO(TaskEntity taskEntity)
         {
-            return new TaskDisplayDTO(taskEntity.name, taskEntity.description);
+            return new TaskDisplayDTO(taskEntity.id, taskEntity.name, taskEntity.description, taskEntity.completed);
         }
 
         public TaskEntity toTaskEntity(TaskDisplayDTO taskDisplayDTO)
         {
-            return new TaskEntity(taskDisplayDTO.name, taskDisplayDTO.description);
+            return new TaskEntity(taskDisplayDTO.id, taskDisplayDTO.name, taskDisplayDTO.description);
         }
     }
 }

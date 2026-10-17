@@ -24,7 +24,14 @@ namespace dotnet_01.Ej_03.taskManager.tasks
             Console.WriteLine($"Id: {taskDisplayDTO.id}");
             Console.WriteLine($"Name: {taskDisplayDTO.name}");
             Console.WriteLine($"Description: {taskDisplayDTO.description}");
-            Console.WriteLine($"Completed: {taskDisplayDTO.completed}");
+
+            if (taskDisplayDTO.completed)
+            {
+                Console.WriteLine($"State: Completed");
+            }
+            else { 
+                Console.WriteLine($"State: Pending");
+            }
         }
 
         public void DisplayList(List<TaskDisplayDTO> tasks)
@@ -32,26 +39,50 @@ namespace dotnet_01.Ej_03.taskManager.tasks
             Console.WriteLine("== TASKS LIST DETAILS ==");
             foreach (var t in tasks)
             {
-                Console.WriteLine($"Id: {t.id}, Name: {t.name}, Description: {t.description}, Completed: {t.completed}");
+                string msg = $"Id: {t.id}, Name: {t.name}, Description: {t.description}, State: ";
+
+                if (t.completed)
+                {
+                    msg += "Completed";
+                }
+                else { msg += "Pending"; }
+
+                Console.WriteLine(msg);
             }
         }
 
         public int AskId()
         {
-            Console.WriteLine("== REMOVE TASK ==");
-            Console.WriteLine("Enter task id: ");
-            int id = int.Parse(Console.ReadLine());
+            bool exit = false;
+            int id = 0;
+            Console.WriteLine("== TASK ID ==");
+
+            while (!exit)
+            { 
+                Console.WriteLine("Enter task id: ");
+
+                try
+                {
+                    id = int.Parse(Console.ReadLine());
+                    exit = true;
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine("== Wrong number format");
+                }
+            }
             return id;
 
         }
 
-        public TaskDisplayDTO AskToUpdate()
+        public TaskDisplayDTO AskToUpdate(int id)
         {
+
             Console.WriteLine("== TASK UPDATE ==");
 
             bool exit = false;
-            string name = "";
-            string description = "";
+            string? name = null;
+            string? description = null;
 
             while (!exit) {
                 Console.WriteLine("1. Name");
@@ -69,50 +100,67 @@ namespace dotnet_01.Ej_03.taskManager.tasks
                         description = Console.ReadLine();
                         break;
                     case "0":
-                        exit = true;
+                        if (name == null || description == null)
+                        {
+                            Console.WriteLine("Name and description cannot be empty!");
+                        }
+                        else { 
+                            exit = true;
+                        }
                         break;
                 }
             }
 
-            return new TaskDisplayDTO(name, description);
+            TaskDisplayDTO taskDisplayDTO = new(name, description);
+            taskDisplayDTO.id = id;
+
+            return taskDisplayDTO;
         }
 
-        public MenuOption AskMenuOption()
+        public TaskOption AskMenuOption()
         {
             bool exit = false;
 
             while (!exit)
             {
+                Console.WriteLine();
+                Console.WriteLine();
                 Console.WriteLine("== MENU ==");
                 Console.WriteLine("1. Create task");
                 Console.WriteLine("2. Update task");
                 Console.WriteLine("3. Delete task");
                 Console.WriteLine("4. Display task");
                 Console.WriteLine("5. Display all tasks");
+                Console.WriteLine("6. Change state");
                 Console.WriteLine("0. Exit");
+                Console.WriteLine();
 
                 string option = Console.ReadLine();
 
                 switch (option)
                 {
                     case "1":
-                        return MenuOption.CreateTask;
+                        return TaskOption.CreateTask;
                     case "2":
-                        return MenuOption.UpdateTask;
+                        return TaskOption.UpdateTask;
                     case "3":
-                        return MenuOption.DeleteTask;
+                        return TaskOption.DeleteTask;
                     case "4":
-                        return MenuOption.TaskDetails;
+                        return TaskOption.TaskDetails;
                     case "5":
-                        return MenuOption.AllTasksDetails;
+                        return TaskOption.AllTasksDetails;
+                    case "6":
+                        return TaskOption.ChangeState;
                     case "0":
-                        return MenuOption.Exit;
+                        return TaskOption.Exit;
                     default:
                         Console.Write("Wrong option selected");
                         break;
-                       
+
                 }
             }
+
+            return new TaskOption();
         }
     }
 }

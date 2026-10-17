@@ -4,12 +4,12 @@ using System.Text;
 
 namespace dotnet_01.Ej_03.taskManager.views
 {
-    internal enum MenuOption
+    internal enum TaskOption
     {
         CreateTask,
         DeleteTask,
         UpdateTask,
-        MaskTaskAsComplete,
+        ChangeState,
         TaskDetails,
         AllTasksDetails,
         Exit

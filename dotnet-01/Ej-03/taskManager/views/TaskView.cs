@@ -11,8 +11,8 @@ namespace dotnet_01.Ej_03.taskManager.views
         void DisplayDetails(TaskDisplayDTO taskDisplayDTO);
         TaskDisplayDTO AskDetails();
         int AskId();
-        TaskDisplayDTO AskToUpdate();
+        TaskDisplayDTO AskToUpdate(int id);
 
-        MenuOption AskMenuOption();
+        TaskOption AskMenuOption();
     }
 }

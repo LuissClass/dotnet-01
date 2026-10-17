@@ -25,23 +25,91 @@ namespace dotnet_01.Ej_03.taskManager.controllers
         void DisplayList()
         {
             List<TaskDisplayDTO> taskDisplayDTOs = new();
+
             foreach (var taskEntity in repository.GetAll()) {
-                TaskDisplayDTO taskDisplayDTO = new(taskEntity.name, taskEntity.description);
-                taskDisplayDTOs.Add(taskDisplayDTO);
+                taskDisplayDTOs.Add(mapper.toTaskDisplayDTO(taskEntity));
             }
 
             view.DisplayList(taskDisplayDTOs);
         }
 
-        void DisplayDetails() => view.DisplayDetails(mapper.toTaskDisplayDTO(repository.Consult(view.AskId())));
+        void DisplayDetails()
+        {
+            int id = view.AskId();
+            TaskEntity taskEntity = repository.Consult(id);
+
+            if (taskEntity == null)
+            {
+                Console.WriteLine($"== Task {id} doesn't exist!");
+                return;
+            }
+
+            view.DisplayDetails(mapper.toTaskDisplayDTO(taskEntity));
+        }
 
 
         void Create() => repository.Add(mapper.toTaskEntity(view.AskDetails()));
 
-        void Delete() => repository.Remove(repository.Consult(view.AskId()));
+        void Delete()
+        {
+            int id = view.AskId();
+            TaskEntity taskEntity = repository.Consult(id);
 
-        void Update() => repository.Update(mapper.toTaskEntity(view.AskToUpdate()));
+            if (taskEntity == null)
+            {
+                Console.WriteLine($"== Task {id} doesn't exist!");
+                return;
+            }
 
-        void MarkAsCompleted() => repository.MarkAsCompleted(view.AskId());
+            repository.Remove(taskEntity);
+        }
+
+        void Update()  
+        {
+            int id = view.AskId();
+            TaskEntity taskEntity = repository.Consult(id);
+
+            if (taskEntity == null) {
+                Console.WriteLine($"== Task {id} doesn't exist!");
+                return;
+            }
+
+            repository.Update(taskEntity, mapper.toTaskEntity(view.AskToUpdate(id)));
+        }
+
+        void ChangeState()
+        {
+            int id = view.AskId();
+            TaskEntity taskEntity = repository.Consult(id);
+
+            if (taskEntity == null)
+            {
+                Console.WriteLine($"== Task {id} doesn't exist!");
+                return;
+            }
+
+            repository.ChangeState(taskEntity);
+        }
+
+        internal void Run()
+        {
+            bool exit = false;
+
+            while (!exit)
+            {
+                TaskOption menuOption = view.AskMenuOption();
+
+                switch (menuOption)
+                {
+                    case TaskOption.CreateTask: Create(); break;
+                    case TaskOption.DeleteTask: Delete(); break;
+                    case TaskOption.UpdateTask: Update(); break;
+                    case TaskOption.ChangeState: ChangeState(); break;
+                    case TaskOption.TaskDetails: DisplayDetails(); break;
+                    case TaskOption.AllTasksDetails: DisplayList(); break;
+                    case TaskOption.Exit: exit = true; break;
+                }
+            }
+        }
     }
 }

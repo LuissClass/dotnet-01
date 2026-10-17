@@ -16,6 +16,7 @@ namespace dotnet_01.Ej_03.taskManager.tasks.repository
 
         public void Add(TaskEntity task)
         {
+            int i = tasks.Count;
             task.id = tasks.Count + 1;
             tasks.Add(task);
         }
@@ -24,7 +25,10 @@ namespace dotnet_01.Ej_03.taskManager.tasks.repository
 
         public List<TaskEntity> GetAll() => tasks;
 
-        public void MarkAsCompleted(int taskId) => tasks.Find(t => t.id == taskId).completed = true;
+        public void ChangeState(TaskEntity taskEntity)
+        {
+            taskEntity.completed = !taskEntity.completed;
+        }
 
         public void Remove(TaskEntity task)
         { 
@@ -35,13 +39,10 @@ namespace dotnet_01.Ej_03.taskManager.tasks.repository
             }
         }
 
-        public void Update(TaskEntity taskEntity)
+        public void Update(TaskEntity taskEntity, TaskEntity newTaskEntityData)
         {
-            TaskEntity taskToChange = tasks.Find(t => t.id == taskEntity.id);
-            taskToChange.id = taskEntity.id;
-            taskToChange.name = taskEntity.name;
-            taskToChange.description = taskEntity.description;
-            taskToChange.completed = taskEntity.completed;
+            taskEntity.name = newTaskEntityData.name;
+            taskEntity.description = newTaskEntityData.description;
         }
     }
 }

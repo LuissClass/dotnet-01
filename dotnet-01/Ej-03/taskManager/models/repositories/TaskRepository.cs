@@ -9,8 +9,8 @@ namespace dotnet_01.Ej_03.taskManager.tasks
         void Add(TaskEntity task);
         void Remove(TaskEntity task);
         TaskEntity Consult(int taskId);
-        void Update(TaskEntity taskEntity);
-        void MarkAsCompleted(int taskId);
+        void Update(TaskEntity taskEntity, TaskEntity newTaskEntityData);
+        void ChangeState(TaskEntity taskEntity);
         List<TaskEntity> GetAll();
     }
 }

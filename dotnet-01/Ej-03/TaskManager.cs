@@ -31,11 +31,12 @@ namespace dotnet_01.Ej_03
 {
 
     
-    internal class Aplication03
+    internal class TaskManager
     {
-        internal static void TaskManager(string[] args)
+        internal static void Run()
         {
             TaskController taskController = new(new TaskRepositoryImpl(), new TaskViewImpl());
+            taskController.Run();
         }
     }
 }
